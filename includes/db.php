@@ -203,5 +203,3 @@ class TIC_Woo_Products_Custom_Fields_DB {
 
     }
 }
-
-new TIC_Woo_Products_Custom_Fields_DB();

@@ -29,6 +29,14 @@ if ( ! defined( 'ABSPATH' ) )
 
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
+define( 'TIC_WOO_PRODUCTS_CUSTOM_FIELDS_VERSION', '1.0.0' );
+define( 'TIC_WOO_PRODUCTS_CUSTOM_FIELDS_FILE', __FILE__ ); // "D:\wamp64\www\ticone\wp-content\plugins\tic-woo-products-custom-fields\init.php"
+define( 'TIC_WOO_PRODUCTS_CUSTOM_FIELDS_BASENAME', plugin_basename( __FILE__ ) ); // "tic-woo-products-custom-fields\init.php"
+define( 'TIC_WOO_PRODUCTS_CUSTOM_FIELDS_DIR', plugin_dir_path( __FILE__ ) ); // "D:\wamp64\www\ticone\wp-content\plugins\tic-woo-products-custom-fields\"
+define( 'TIC_WOO_PRODUCTS_CUSTOM_FIELDS_URL', plugins_url( '', __FILE__ ) ); // "http://localhost/ticone/wp-content/plugins/tic-woo-products-custom-fields/"
+// echo '<pre>';
+// var_dump(TIC_WOO_PRODUCTS_CUSTOM_FIELDS_VERSION, TIC_WOO_PRODUCTS_CUSTOM_FIELDS_FILE, TIC_WOO_PRODUCTS_CUSTOM_FIELDS_BASENAME, TIC_WOO_PRODUCTS_CUSTOM_FIELDS_DIR, TIC_WOO_PRODUCTS_CUSTOM_FIELDS_URL);
+// echo '</pre>';
 if ( ! class_exists( 'TIC_Woo_Products_Custom_Fields' ) ) :
 
     class TIC_Woo_Products_Custom_Fields
@@ -50,10 +58,13 @@ if ( ! class_exists( 'TIC_Woo_Products_Custom_Fields' ) ) :
         }
 
         public static function includes() {
+            require_once( __DIR__ . '/includes/assets-manager.php' );
             require_once( __DIR__ . '/includes/db.php' );
             require_once( __DIR__ . '/includes/settings.php' );
-            // require_once( __DIR__ . '/includes/tic-woo-products-custom-fields.php' );
+            require_once( __DIR__ . '/includes/custom-fields.php' );
+            TIC_Woo_Products_Custom_Fields_Assets_Manager::getInstance()->init();
             TIC_Woo_Products_Custom_Fields_Settings::getInstance()->init();
+            TIC_Woo_Products_Fields_Instance::getInstance()->init();
         }
 
         public function update_check() {
